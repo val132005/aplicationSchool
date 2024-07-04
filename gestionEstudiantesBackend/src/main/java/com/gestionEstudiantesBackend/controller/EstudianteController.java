@@ -1,6 +1,7 @@
 package com.gestionEstudiantesBackend.controller;
 
 import com.gestionEstudiantesBackend.model.estudiante.Estudiante;
+import com.gestionEstudiantesBackend.model.estudiante.EstudianteDTO;
 import com.gestionEstudiantesBackend.service.EstudianteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,36 +20,36 @@ public class EstudianteController {
     }
 
     @GetMapping("/listaEstudiantes")
-    public List<Estudiante> listarEstudiantes() {
+    public List<EstudianteDTO> listarEstudiantes() {
         return estudianteService.listarEstudiantes();
     }
 
     @PostMapping("/registrarEstudiantes")
-    public Estudiante registrarEstudiante(@RequestBody Estudiante estudiante) {
+    public EstudianteDTO registrarEstudiante(@RequestBody Estudiante estudiante) {
         return estudianteService.registrarEstudiante(estudiante);
     }
 
     @GetMapping("/consultarEstudiante/{id}")
-    public ResponseEntity<Estudiante> consultarEstudiante(@PathVariable long id) {
-        Estudiante estudiante = estudianteService.consultarEstudiante(id);
+    public ResponseEntity<EstudianteDTO> consultarEstudiante(@PathVariable long id) {
+        EstudianteDTO estudiante = estudianteService.consultarEstudiante(id);
         return ResponseEntity.ok(estudiante);
     }
 
     @PutMapping("/actualizarEstudiante/{id}")
-    public ResponseEntity<Estudiante> actualizarEstudiante(@PathVariable Long id, @RequestBody Estudiante estudianteRequest) {
-        Estudiante estudianteActualizado = estudianteService.actualizarEstudiante(id, estudianteRequest);
+    public ResponseEntity<EstudianteDTO> actualizarEstudiante(@PathVariable Long id, @RequestBody EstudianteDTO estudianteRequest) {
+        EstudianteDTO estudianteActualizado = estudianteService.actualizarEstudiante(id, estudianteRequest);
         return ResponseEntity.ok(estudianteActualizado);
     }
 
     @PutMapping("/inactivarEstudiante/{id}")
-    public ResponseEntity<Estudiante> inactivarEstudiante(@PathVariable Long id) {
-        Estudiante estudianteActualizado = estudianteService.inactivarEstudiante(id);
+    public ResponseEntity<EstudianteDTO> inactivarEstudiante(@PathVariable Long id) {
+        EstudianteDTO estudianteActualizado = estudianteService.inactivarEstudiante(id);
         return ResponseEntity.ok(estudianteActualizado);
     }
 
     @PutMapping("/activarEstudiante/{id}")
-    public ResponseEntity<Estudiante> activarEstudiante(@PathVariable Long id) {
-        Estudiante estudianteActualizado = estudianteService.activarEstudiante(id);
+    public ResponseEntity<EstudianteDTO> activarEstudiante(@PathVariable Long id) {
+        EstudianteDTO estudianteActualizado = estudianteService.activarEstudiante(id);
         return ResponseEntity.ok(estudianteActualizado);
     }
 
