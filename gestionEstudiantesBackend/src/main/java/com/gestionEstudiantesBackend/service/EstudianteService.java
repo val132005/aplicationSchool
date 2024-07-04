@@ -1,8 +1,8 @@
 package com.gestionEstudiantesBackend.service;
 
 import com.gestionEstudiantesBackend.exception.ResourceNotFoundException;
-import com.gestionEstudiantesBackend.model.estudiante.Estado;
-import com.gestionEstudiantesBackend.model.estudiante.Estudiante;
+import com.gestionEstudiantesBackend.mapper.IEstudianteMapper;
+import com.gestionEstudiantesBackend.model.estudiante.*;
 import com.gestionEstudiantesBackend.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,27 +15,30 @@ public class EstudianteService {
     @Autowired
     private EstudianteRepository estudianteRepository;
 
-    public List<Estudiante> listarEstudiantes() {
-        return estudianteRepository.findAll();
+    @Autowired
+    private IEstudianteMapper mapper;
+
+    public List<EstudianteDTO> listarEstudiantes() {
+        return mapper.loadDtos(estudianteRepository.findAll());
     }
 
-    public Estudiante registrarEstudiante(Estudiante estudiante) {
-        return estudianteRepository.save(estudiante);
+    public EstudianteDTO registrarEstudiante(Estudiante estudiante) {
+        return mapper.loadDto(estudianteRepository.save(estudiante));
     }
 
-    public Estudiante consultarEstudiante(long id) {
-        return estudianteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("El estudiante con Id " + id + " no existe"));
+    public EstudianteDTO consultarEstudiante(long id) {
+        return mapper.loadDto(estudianteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("El estudiante con Id " + id + " no existe")));
     }
 
-    public Estudiante actualizarEstudiante(long id, Estudiante estudianteRequest) {
+    public EstudianteDTO actualizarEstudiante(long id, EstudianteDTO estudianteRequest) {
         Estudiante estudiante = estudianteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("El estudiante con Id " + id + " no existe"));
-        estudiante.setEstado(estudianteRequest.getEstado());
+        estudiante.setEstado(Estado.valueOf(estudianteRequest.getEstado()));
         estudiante.setNombre(estudianteRequest.getNombre());
-        estudiante.setTipoDocumento(estudianteRequest.getTipoDocumento());
+        estudiante.setTipoDocumento(TipoDocumento.valueOf(estudianteRequest.getTipoDocumento()));
         estudiante.setNumeroDeDocumento(estudianteRequest.getNumeroDeDocumento());
-        estudiante.setGenero(estudianteRequest.getGenero());
+        estudiante.setGenero(Genero.valueOf(estudianteRequest.getGenero()));
         estudiante.setEdad(estudianteRequest.getEdad());
         estudiante.setFechaDeNacimiento(estudianteRequest.getFechaDeNacimiento());
         estudiante.setCiudadDeNacimiento(estudianteRequest.getCiudadDeNacimiento());
@@ -50,21 +53,21 @@ public class EstudianteService {
         estudiante.setTelefonoDelAcudiente(estudianteRequest.getTelefonoDelAcudiente());
         estudiante.setEmailDelAcudiente(estudianteRequest.getEmailDelAcudiente());
 
-        return estudianteRepository.save(estudiante);
+        return mapper.loadDto(estudianteRepository.save(estudiante));
     }
 
-    public Estudiante inactivarEstudiante(long id) {
+    public EstudianteDTO inactivarEstudiante(long id) {
         Estudiante estudiante = estudianteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("El estudiante con Id " + id + " no existe"));
         estudiante.setEstado(Estado.INACTIVO);
-        return estudianteRepository.save(estudiante);
+        return mapper.loadDto(estudianteRepository.save(estudiante));
     }
 
-    public Estudiante activarEstudiante(long id) {
+    public EstudianteDTO activarEstudiante(long id) {
         Estudiante estudiante = estudianteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("El estudiante con Id " + id + " no existe"));
         estudiante.setEstado(Estado.ACTIVO);
-        return estudianteRepository.save(estudiante);
+        return mapper.loadDto(estudianteRepository.save(estudiante));
     }
 
 }
