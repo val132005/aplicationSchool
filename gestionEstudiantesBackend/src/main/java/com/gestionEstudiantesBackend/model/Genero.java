@@ -1,4 +1,4 @@
-package com.gestionEstudiantesBackend.model.estudiante;
+package com.gestionEstudiantesBackend.model;
 
 public enum Genero {
 

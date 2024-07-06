@@ -1,26 +1,27 @@
-package com.gestionEstudiantesBackend.model.estudiante;
+package com.gestionEstudiantesBackend.model.profesor;
 
 import com.gestionEstudiantesBackend.model.curso.CursoDTO;
-import lombok.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstudianteDTO {
+public class ProfesorDTO {
 
     @NotNull
-    @Size(min = 1, max = 50)
-    private String nombre;
-    @NotNull
     private String estado;
+    @NotNull
+    private String nombre;
     @NotNull
     private String tipoDocumento;
     @NotNull
     private long numeroDeDocumento;
-    @NotNull
     private String genero;
     @NotNull
     private int edad;
@@ -29,25 +30,14 @@ public class EstudianteDTO {
     private String ciudadDeNacimiento;
     private String paisDeNacimiento;
     @NotNull
-    private String nivelAcademico;
-    @NotNull
-    private int cursoAlQuePertenece;
-    @NotNull
     private long numeroDeTelefono;
     @Email
+    @NotNull
     private String email;
     @NotNull
     private String direccion;
     @NotNull
-    private String nombreDelAcudiente;
-    @NotNull
-    private String relacionEntreElAcudienteYEstudiante;
-    @NotNull
-    private Long telefonoDelAcudiente;
-    @Email
-    @NotNull
-    private String emailDelAcudiente;
-    @NotNull
     private CursoDTO cursoDTO;
-    }
 
+
+}

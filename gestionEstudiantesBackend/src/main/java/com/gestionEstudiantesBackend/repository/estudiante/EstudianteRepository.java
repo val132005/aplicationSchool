@@ -1,4 +1,4 @@
-package com.gestionEstudiantesBackend.repository;
+package com.gestionEstudiantesBackend.repository.estudiante;
 
 import com.gestionEstudiantesBackend.model.estudiante.Estudiante;
 import org.springframework.data.jpa.repository.JpaRepository;

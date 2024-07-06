@@ -1,8 +1,8 @@
-package com.gestionEstudiantesBackend.controller;
+package com.gestionEstudiantesBackend.controller.estudiante;
 
 import com.gestionEstudiantesBackend.model.estudiante.Estudiante;
 import com.gestionEstudiantesBackend.model.estudiante.EstudianteDTO;
-import com.gestionEstudiantesBackend.service.EstudianteService;
+import com.gestionEstudiantesBackend.service.estudiante.EstudianteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

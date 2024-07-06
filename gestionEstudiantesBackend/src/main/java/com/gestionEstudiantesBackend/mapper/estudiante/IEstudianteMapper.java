@@ -1,5 +1,6 @@
-package com.gestionEstudiantesBackend.mapper;
+package com.gestionEstudiantesBackend.mapper.estudiante;
 
+import com.gestionEstudiantesBackend.mapper.IMapperGenerico;
 import com.gestionEstudiantesBackend.model.estudiante.Estudiante;
 import com.gestionEstudiantesBackend.model.estudiante.EstudianteDTO;
 import org.mapstruct.Mapper;

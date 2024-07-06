@@ -1,4 +1,4 @@
-package com.gestionEstudiantesBackend.model.estudiante;
+package com.gestionEstudiantesBackend.model.profesor;
 
 import com.gestionEstudiantesBackend.model.Estado;
 import com.gestionEstudiantesBackend.model.Genero;
@@ -7,18 +7,16 @@ import com.gestionEstudiantesBackend.model.curso.Curso;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Entity
-@Table(name = "estudiantes")
-public class Estudiante {
+@Table(name = "profesores")
+public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +26,7 @@ public class Estudiante {
     private Estado estado;
 
     @Column(name = "nombre")
-    private  String nombre;
+    private String nombre;
 
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
@@ -46,16 +44,10 @@ public class Estudiante {
     private Date fechaDeNacimiento;
 
     @Column(name = "ciudadDeNacimiento")
-    private  String ciudadDeNacimiento;
+    private String ciudadDeNacimiento;
 
     @Column(name = "paisDeNacimiento")
     private String paisDeNacimiento;
-
-    @Column(name = "nivelAcademico")
-    private String nivelAcademico;
-
-    @Column(name = "cursoAlQuePertenece")
-    private int cursoAlQuePertenece;
 
     @Column(name = "numeroDeTelefono")
     private long numeroDeTelefono;
@@ -66,26 +58,7 @@ public class Estudiante {
     @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "nombreDelAcudiente")
-    private String nombreDelAcudiente;
-
-    @Column(name = "relacionEntreElAcudienteYEstudiante")
-    private String relacionEntreElAcudienteYEstudiante;
-
-    @Column(name = "telefonoDelAcudiente")
-    private Long telefonoDelAcudiente;
-
-    @Column(name = "emailDelAcudiente")
-    private String emailDelAcudiente;
-
-    @ManyToOne
-    @JoinColumn(name = "curso_id")
+    @OneToOne(mappedBy = "profesor")
     private Curso curso;
-
-
-
-
-
-
 
 }

@@ -1,10 +1,13 @@
-package com.gestionEstudiantesBackend.service;
+package com.gestionEstudiantesBackend.service.estudiante;
 
 import com.gestionEstudiantesBackend.exception.ResourceNotFoundException;
-import com.gestionEstudiantesBackend.mapper.IEstudianteMapper;
-import com.gestionEstudiantesBackend.model.estudiante.*;
-import com.gestionEstudiantesBackend.repository.EstudianteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gestionEstudiantesBackend.mapper.estudiante.IEstudianteMapper;
+import com.gestionEstudiantesBackend.model.Estado;
+import com.gestionEstudiantesBackend.model.Genero;
+import com.gestionEstudiantesBackend.model.TipoDocumento;
+import com.gestionEstudiantesBackend.model.estudiante.Estudiante;
+import com.gestionEstudiantesBackend.model.estudiante.EstudianteDTO;
+import com.gestionEstudiantesBackend.repository.estudiante.EstudianteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +15,13 @@ import java.util.List;
 @Service
 public class EstudianteService {
 
-    @Autowired
     private EstudianteRepository estudianteRepository;
-
-    @Autowired
     private IEstudianteMapper mapper;
+
+    public EstudianteService(EstudianteRepository estudianteRepository, IEstudianteMapper mapper) {
+        this.estudianteRepository = estudianteRepository;
+        this.mapper = mapper;
+    }
 
     public List<EstudianteDTO> listarEstudiantes() {
         return mapper.loadDtos(estudianteRepository.findAll());
